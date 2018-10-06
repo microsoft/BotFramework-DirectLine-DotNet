@@ -1,5 +1,5 @@
 ---
-name: ".NET Directline Feature request"
+name: ".NET Directline Feature Request"
 about: Suggest a feature for the Bot Framework .NET Directline SDK
 
 ---
