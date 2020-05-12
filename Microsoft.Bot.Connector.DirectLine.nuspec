@@ -1,0 +1,35 @@
+﻿<?xml version="1.0"?>
+<package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
+    <id>Microsoft.Bot.Connector.DirectLine</id>
+    <version>3.0.2</version>
+    <authors>Microsoft</authors>
+    <iconUrl>https://bots.botframework.com/Client/Images/bot-framework-default-7.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This library implements C# classes for using the Bot Framework Direct Line REST API</description>
+    <summary>Client REST API library for Microsoft Bot Framework Connector Direct Line</summary>
+    <language>en-US</language>
+    <dependencies>
+      <group targetFramework=".NETFramework4.5">
+        <dependency id="Microsoft.Rest.ClientRuntime" version="2.3.2" />
+        <dependency id="Newtonsoft.Json" version="6.0.8" />
+      </group>
+      <group targetFramework="netstandard1.3">
+        <dependency id="Newtonsoft.Json" version="9.0.1" />
+        <dependency id="System.Collections" version="4.0.11" />
+        <dependency id="System.Diagnostics.Debug" version="4.0.11" />
+        <dependency id="System.Dynamic.Runtime" version="4.0.11" />
+        <dependency id="System.Net.Http" version="4.1.0" />
+        <dependency id="System.Net.Primitives" version="4.0.11" />
+        <dependency id="System.Runtime" version="4.1.0" />
+        <dependency id="System.Runtime.InteropServices" version="4.1.0" />
+        <dependency id="System.Text.Encoding" version="4.0.11" />
+        <dependency id="System.Threading.Tasks" version="4.0.11" />
+      </group>
+    </dependencies>
+  </metadata>
+  <files>
+    <file src="bin\$configuration$\Microsoft.Bot.Connector.DirectLine.dll" target="lib\net45" />
+    <file src="..\Microsoft.Bot.Connector.DirectLine.3.0.PCL\bin\$configuration$\Microsoft.Bot.Connector.DirectLine.dll" target="lib\netstandard1.3" />
+  </files>
+</package>
