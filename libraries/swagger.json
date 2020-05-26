@@ -482,7 +482,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Channel id for the user or bot on this channel (Example: joe@smith.com, or @joesmith or 123456)",
+          "description": "Channel id for the user or bot on this channel (Example: cid:abc123id or 123456)",
           "type": "string"
         },
         "name": {
@@ -768,7 +768,7 @@
           "type": "string"
         },
         "id": {
-          "description": "Channel id for the user or bot on this channel (Example: joe@smith.com, or @joesmith or 123456)",
+          "description": "Channel id for the user or bot on this channel (Example: cid:abc123id or 123456)",
           "type": "string"
         },
         "name": {

@@ -1,4 +1,7 @@
-﻿using System;
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license.
+
+using System;
 #if FEATURE_SYSTEM_CONFIGURATION
 using System.Configuration;
 #endif

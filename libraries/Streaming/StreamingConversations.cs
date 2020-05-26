@@ -1,4 +1,7 @@
-﻿namespace Microsoft.Bot.Connector.DirectLine
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license.
+
+namespace Microsoft.Bot.Connector.DirectLine
 {
     using System;
     using System.Net.Http;
