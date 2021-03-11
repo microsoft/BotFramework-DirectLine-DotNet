@@ -65,7 +65,7 @@
                 watermark = activitySet?.Watermark;
 
                 var activities = from x in activitySet.Activities
-                                 where x.From.Id == botId
+                                 where x.From.Id == "directline-csharp"
                                  select x;
 
                 foreach (Activity activity in activities)
