@@ -83,7 +83,7 @@ private static void WebSocketClient_OnMessage(object sender, MessageEventArgs e)
 {
     var activitySet = JsonConvert.DeserializeObject<ActivitySet>(e.Data);
     var activities = from x in activitySet.Activities
-        where x.From.Id == "directline-csharp"
+        where x.From.Id == botId
         select x;
 ````
 
