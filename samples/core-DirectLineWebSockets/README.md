@@ -8,6 +8,7 @@ The minimum prerequisites to run this sample are:
 * The latest update of Visual Studio 2017. You can download the community version [here](http://www.visualstudio.com) for free.
 * The Bot Framework Emulator. To install the Bot Framework Emulator, download it from [here](https://emulator.botframework.com/). Please refer to [this documentation article](https://github.com/microsoft/botframework-emulator/wiki/Getting-Started) to know more about the Bot Framework Emulator.
 * Register your bot with the Microsoft Bot Framework. Please refer to [this](https://docs.microsoft.com/en-us/bot-framework/portal-register-bot) for the instructions. Once you complete the registration, update the [Bot's appsettings.json](DirectLineBot/appsettings.json) file with the registered config values (MicrosoftAppId and MicrosoftAppPassword)
+* For the client in this sample, The botId should be coming from app.config: https://github.com/microsoft/BotFramework-DirectLine-DotNet/blob/main/samples/core-DirectLineWebSockets/DirectLineClient/App.config#L5
 
 #### Direct Line API
 Credentials for the Direct Line API must be obtained from the Bot Channels Registration in the Azure portal, and will only allow the caller to connect to the bot for which they were generated.
@@ -82,7 +83,7 @@ private static void WebSocketClient_OnMessage(object sender, MessageEventArgs e)
 {
     var activitySet = JsonConvert.DeserializeObject<ActivitySet>(e.Data);
     var activities = from x in activitySet.Activities
-        where x.From.Id == botId
+        where x.From.Id == "directline-csharp"
         select x;
 ````
 
