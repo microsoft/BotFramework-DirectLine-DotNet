@@ -68,7 +68,7 @@ var activitySet = await client.Conversations.GetActivitiesAsync(conversationId, 
 watermark = activitySet?.Watermark;
 
 var activities = from x in activitySet.Activities
-                    where x.From.Id == "directline-csharp"
+                    where x.From.Id == botId
                     select x;
 ````
 
