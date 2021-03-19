@@ -65,7 +65,7 @@
                 watermark = activitySet?.Watermark;
 
                 var activities = from x in activitySet.Activities
-                                 where x.From.Id == botId
+                                 where x.From.Id != fromUser
                                  select x;
 
                 foreach (Activity activity in activities)
