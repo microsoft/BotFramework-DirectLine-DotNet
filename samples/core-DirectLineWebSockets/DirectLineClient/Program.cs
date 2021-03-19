@@ -80,7 +80,7 @@
 
             var activitySet = JsonConvert.DeserializeObject<ActivitySet>(e.Data);
             var activities = from x in activitySet.Activities
-                             where x.From.Id == "directline-csharp"
+                             where x.From.Id == botId
                              select x;
 
             foreach (Activity activity in activities)
