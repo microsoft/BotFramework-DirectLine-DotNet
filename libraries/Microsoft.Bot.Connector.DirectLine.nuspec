@@ -27,8 +27,4 @@
       </group>
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\$configuration$\Microsoft.Bot.Connector.DirectLine.dll" target="lib\net45" />
-    <file src="..\Microsoft.Bot.Connector.DirectLine.3.0.PCL\bin\$configuration$\Microsoft.Bot.Connector.DirectLine.dll" target="lib\netstandard1.3" />
-  </files>
 </package>
