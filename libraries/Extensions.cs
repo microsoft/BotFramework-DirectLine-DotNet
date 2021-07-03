@@ -29,7 +29,7 @@ namespace Microsoft.Bot.Connector.DirectLine
                 }
                 return returnValue;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
@@ -49,7 +49,7 @@ namespace Microsoft.Bot.Connector.DirectLine
                 }
                 return null;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 throw;
             }
