@@ -2,13 +2,16 @@
 
   <PropertyGroup>
     <TargetFrameworks>netstandard2.0;net462;net472</TargetFrameworks>
+    <LocalPackageVersion>4.11.0-local</LocalPackageVersion>
+    <Version Condition=" '$(ReleasePackageVersion)' == '' ">$(LocalPackageVersion)</Version>
+    <Version Condition=" '$(ReleasePackageVersion)' != '' ">$(ReleasePackageVersion)</Version>
+    <PackageVersion Condition=" '$(ReleasePackageVersion)' == '' ">$(LocalPackageVersion)</PackageVersion>
+    <PackageVersion Condition=" '$(ReleasePackageVersion)' != '' ">$(ReleasePackageVersion)</PackageVersion>
   </PropertyGroup>
 
   <PropertyGroup>
     <Title>Microsoft.Bot.Connector.DirectLine</Title>
     <Description>This library implements C# classes for using the Bot Framework Direct Line REST API</Description>
-    <VersionPrefix>3.0.2</VersionPrefix>
-    <VersionSuffix></VersionSuffix>
     <Company>Microsoft</Company>
     <Authors>Microsoft</Authors>
     <PackageIconUrl>https://bots.botframework.com/Client/Images/bot-framework-default-7.png</PackageIconUrl>
