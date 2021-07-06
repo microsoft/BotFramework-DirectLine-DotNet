@@ -2,7 +2,6 @@
 <package xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <metadata xmlns="http://schemas.microsoft.com/packaging/2010/07/nuspec.xsd">
     <id>Microsoft.Bot.Connector.DirectLine</id>
-    <version>3.0.2</version>
     <authors>Microsoft</authors>
     <iconUrl>https://bots.botframework.com/Client/Images/bot-framework-default-7.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
@@ -28,8 +27,4 @@
       </group>
     </dependencies>
   </metadata>
-  <files>
-    <file src="bin\$configuration$\Microsoft.Bot.Connector.DirectLine.dll" target="lib\net45" />
-    <file src="..\Microsoft.Bot.Connector.DirectLine.3.0.PCL\bin\$configuration$\Microsoft.Bot.Connector.DirectLine.dll" target="lib\netstandard1.3" />
-  </files>
 </package>
