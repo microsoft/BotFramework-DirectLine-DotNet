@@ -15,10 +15,12 @@
     <Company>Microsoft</Company>
     <Authors>Microsoft</Authors>
     <PackageIconUrl>https://bots.botframework.com/Client/Images/bot-framework-default-7.png</PackageIconUrl>
-    <!-- Do not remove the following lines, these are used when building the packages. See the OneNote Channel SDK page. -->
-    <!--<SignAssembly>true</SignAssembly>-->
-    <!--<DelaySign>true</DelaySign>-->
-    <!--<AssemblyOriginatorKeyFile>../35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>-->
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)'=='Release'">
+    <AssemblyOriginatorKeyFile>$(SolutionDir)\build\35MSSharedLib1024.snk</AssemblyOriginatorKeyFile>
+    <SignAssembly>true</SignAssembly>
+    <DelaySign>true</DelaySign>
   </PropertyGroup>
 
   <ItemGroup>
