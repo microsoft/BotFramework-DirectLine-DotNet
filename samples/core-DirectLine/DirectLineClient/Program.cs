@@ -22,6 +22,10 @@
 
         private static async Task StartBotConversation()
         {
+            // if you are using a region-specific endpoint, change the uri and uncomment the code
+            // var directLineUri = "https://directline.botframework.com/"; // endpoint in Azure Public Cloud
+            // DirectLineClient client = new DirectLineClient(new Uri(directLineUri), new DirectLineClientCredentials(directLineSecret));
+
             DirectLineClient client = new DirectLineClient(directLineSecret);
 
             var conversation = await client.Conversations.StartConversationAsync();

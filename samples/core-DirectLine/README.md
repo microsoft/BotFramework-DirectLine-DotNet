@@ -27,8 +27,12 @@ Check out the client's [Program.cs](DirectLineClient/Program.cs#L25-L27) class w
 
 
 ````C#
+// if you are using a region-specific endpoint, change the uri and uncomment the code
+// var directLineUri = "https://directline.botframework.com/"; // endpoint in Azure Public Cloud
+// DirectLineClient client = new DirectLineClient(new Uri(directLineUri), new DirectLineClientCredentials(directLineSecret));
+
 DirectLineClient client = new DirectLineClient(directLineSecret);
-            
+
 var conversation = await client.Conversations.StartConversationAsync();
 ````
 
