@@ -27,5 +27,6 @@
     <PackageReference Include="Microsoft.Bot.Streaming" Version="4.9.0" />
     <PackageReference Include="Microsoft.Rest.ClientRuntime" Version="2.3.20" />
     <PackageReference Include="System.Net.Http" Version="4.3.4" />
+    <PackageReference Include="System.Net.Http.Json" Version="6.0.0" />
   </ItemGroup>
 </Project>

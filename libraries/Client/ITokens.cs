@@ -29,7 +29,7 @@ namespace Microsoft.Bot.Connector.DirectLine
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Conversation>> RefreshTokenWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Conversation>> RefreshTokenWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, string conversationId = null, Func<Task<string>> tokenRefreshCallback = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Generate a token for a new conversation
         /// </summary>

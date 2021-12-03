@@ -59,11 +59,14 @@ namespace Microsoft.Bot.Connector.DirectLine
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<Conversation>> RefreshTokenWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Conversation>> RefreshTokenWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, string conversationId = null, Func<Task<string>> tokenRefreshCallback = null, CancellationToken cancellationToken = default(CancellationToken))
         {
+            var newToken = await tokenRefreshCallback();
+
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
             string _invocationId = null;
+
             if (_shouldTrace)
             {
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
@@ -73,7 +76,8 @@ namespace Microsoft.Bot.Connector.DirectLine
             }
             // Construct URL
             var _baseUrl = this.Client.BaseUri.AbsoluteUri;
-            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), "v3/directline/tokens/refresh").ToString();
+            var path = string .IsNullOrEmpty(newToken) || string.IsNullOrEmpty(conversationId) ? "v3/directline/tokens/refresh" : $"v3/directline/tokens/refresh/{conversationId}";
+            var _url = new Uri(new Uri(_baseUrl + (_baseUrl.EndsWith("/") ? "" : "/")), path).ToString();
             // Create HTTP transport objects
             HttpRequestMessage _httpRequest = new HttpRequestMessage();
             HttpResponseMessage _httpResponse = null;
@@ -99,6 +103,7 @@ namespace Microsoft.Bot.Connector.DirectLine
             {
                 cancellationToken.ThrowIfCancellationRequested();
                 await this.Client.Credentials.ProcessHttpRequestAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
+
             }
             // Send Request
             if (_shouldTrace)
@@ -106,6 +111,12 @@ namespace Microsoft.Bot.Connector.DirectLine
                 ServiceClientTracing.SendRequest(_invocationId, _httpRequest);
             }
             cancellationToken.ThrowIfCancellationRequested();
+
+            if (!(string.IsNullOrEmpty(newToken) || string.IsNullOrEmpty(conversationId)))
+            {
+                _httpRequest.Headers.TryAddWithoutValidation(TokensExtensions.Refresh_Token, newToken);
+            }
+
             _httpResponse = await this.Client.HttpClient.SendAsync(_httpRequest, cancellationToken).ConfigureAwait(false);
             if (_shouldTrace)
             {
@@ -142,6 +153,15 @@ namespace Microsoft.Bot.Connector.DirectLine
                 try
                 {
                     _result.Body = SafeJsonConvert.DeserializeObject<Conversation>(_responseContent, this.Client.DeserializationSettings);
+
+                    var cc = this.Client.Credentials as DirectLineClientCredentials;
+
+                    if(string.Equals(newToken, _result.Body.Token))
+                    {
+                        // Make the new token the new auth token from here on until next token refresh is called
+                        cc.Authorization = _result.Body.Token;
+                    }
+                    
                 }
                 catch (JsonException ex)
                 {

@@ -20,33 +20,61 @@ namespace Microsoft.Bot.Connector.DirectLine
     /// </summary>
     public static partial class TokensExtensions
     {
-            /// <summary>
-            /// Refresh a token
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            public static Conversation RefreshToken(this ITokens operations)
-            {
-                return Task.Factory.StartNew(s => ((ITokens)s).RefreshTokenAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
-            }
+        public static readonly string Refresh_Token = "Refresh-Token";
 
-            /// <summary>
-            /// Refresh a token
-            /// </summary>
-            /// <param name='operations'>
-            /// The operations group for this extension method.
-            /// </param>
-            /// <param name='cancellationToken'>
-            /// The cancellation token.
-            /// </param>
-            public static async Task<Conversation> RefreshTokenAsync(this ITokens operations, CancellationToken cancellationToken = default(CancellationToken))
+        /// <summary>
+        /// Refresh a token
+        /// </summary>
+        /// <param name='operations'>
+        /// The operations group for this extension method.
+        /// </param>
+        public static Conversation RefreshToken(this ITokens operations)
+        {
+            return Task.Factory.StartNew(s => ((ITokens)s).RefreshTokenAsync(), operations, CancellationToken.None, TaskCreationOptions.None, TaskScheduler.Default).Unwrap().GetAwaiter().GetResult();
+        }
+
+        /// <summary>
+        /// Refresh a token
+        /// </summary>
+        /// <param name='operations'>
+        /// The operations group for this extension method.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public static async Task<Conversation> RefreshTokenAsync(this ITokens operations, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await operations.RefreshTokenWithHttpMessagesAsync(null, null, null, cancellationToken).ConfigureAwait(false))
             {
-                using (var _result = await operations.RefreshTokenWithHttpMessagesAsync(null, cancellationToken).ConfigureAwait(false))
-                {
-                    return _result.Body;
-                }
+                return _result.Body;
             }
+        }
+
+        /// <summary>
+        /// Refresh a token
+        /// </summary>
+        /// <param name='operations'>
+        /// The operations group for this extension method.
+        /// </param>
+        /// <param name='refreshToken'>
+        /// The new AAD token used to continue a conversation.
+        /// </param>
+        /// <param name='conversationId'>
+        /// The conversationId of the conversation to be continued.
+        /// </param>
+        /// <param name='tokenRefreshCallback'>
+        /// A callback function to fetch an AAD token. Must return a token string.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        public static async Task<Conversation> RefreshTokenAsync(this ITokens operations, string conversationId, Func<Task<string>> tokenRefreshCallback = null, CancellationToken cancellationToken = default(CancellationToken))
+        {
+            using (var _result = await operations.RefreshTokenWithHttpMessagesAsync(null, conversationId, tokenRefreshCallback, cancellationToken).ConfigureAwait(false))
+            {
+                return _result.Body;
+            }
+        }
 
             /// <summary>
             /// Generate a token for a new conversation
