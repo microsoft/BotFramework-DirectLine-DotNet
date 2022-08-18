@@ -29,7 +29,7 @@ namespace Microsoft.Bot.Connector.DirectLine
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse<Conversation>> StartConversationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse<Conversation>> StartConversationWithHttpMessagesAsync(string siteId = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
         /// <summary>
         /// Get information about an existing conversation
         /// </summary>

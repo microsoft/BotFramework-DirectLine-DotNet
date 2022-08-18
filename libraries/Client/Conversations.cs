@@ -20,7 +20,8 @@ namespace Microsoft.Bot.Connector.DirectLine
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
-    
+    using System.Net.Http.Json;
+
 
     /// <summary>
     /// Conversations operations.
@@ -59,7 +60,7 @@ namespace Microsoft.Bot.Connector.DirectLine
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse<Conversation>> StartConversationWithHttpMessagesAsync(Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse<Conversation>> StartConversationWithHttpMessagesAsync(string siteId = null, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -91,6 +92,9 @@ namespace Microsoft.Bot.Connector.DirectLine
                     _httpRequest.Headers.TryAddWithoutValidation(_header.Key, _header.Value);
                 }
             }
+
+            // set request param
+            _httpRequest.Content = JsonContent.Create(new { SiteId = siteId });
 
             // Serialize Request
             string _requestContent = null;

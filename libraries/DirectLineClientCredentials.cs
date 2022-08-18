@@ -24,12 +24,15 @@ namespace Microsoft.Bot.Connector.DirectLine
 #else
         // .NET Core does not support System.Configuration API's.
         private static Lazy<string> _secret = new Lazy<string>(() => null);
+        private static Lazy<string> _token = new Lazy<string>(() => null);
         private static Lazy<string> _endpoint = new Lazy<string>(() => null);
 #endif
 
         public string Secret { get; private set; }
 
-        public string Authorization { get; private set; }
+        public string Token { get; private set; }
+
+        public string Authorization { get; internal set; }
 
         public string Endpoint { get; protected set; }
 
@@ -41,6 +44,19 @@ namespace Microsoft.Bot.Connector.DirectLine
         {
             this.Secret = secret ?? _secret.Value;
             this.Authorization = this.Secret;
+            this.Endpoint = endpoint ?? _endpoint.Value ?? "https://directline.botframework.com/";
+        }
+
+        /// <summary>
+        /// Create a new instance of the DirectLineClientCredentials class
+        /// </summary>
+        /// <param name="secret">default will come from Settings["DirectLineSecret"]</param>
+        /// <param name="token">default will come from Settings["AadToken"]</param>
+        public DirectLineClientCredentials(string secret, string token, string endpoint = null)
+        {
+            this.Secret = secret ?? _secret.Value;
+            this.Token = token ?? _token.Value;
+            this.Authorization = this.Secret ?? this.Token;
             this.Endpoint = endpoint ?? _endpoint.Value ?? "https://directline.botframework.com/";
         }
 
