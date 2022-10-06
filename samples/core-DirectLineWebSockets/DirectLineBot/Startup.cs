@@ -27,7 +27,7 @@ namespace DirectLineBot
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddControllers().AddNewtonsoftJson();
 
             // Create the Bot Framework Adapter with error handling enabled.
             services.AddSingleton<IBotFrameworkHttpAdapter, AdapterWithErrorHandler>();
@@ -43,16 +43,16 @@ namespace DirectLineBot
             {
                 app.UseDeveloperExceptionPage();
             }
-            else
-            {
-                app.UseHsts();
-            }
 
-            app.UseDefaultFiles();
-            app.UseStaticFiles();
-            app.UseWebSockets();
+            app.UseDefaultFiles()
+                .UseStaticFiles()
+                .UseRouting()
+                .UseAuthorization()
+                .UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllers();
+                });
             //app.UseHttpsRedirection();
-            app.UseMvc();
         }
     }
 }

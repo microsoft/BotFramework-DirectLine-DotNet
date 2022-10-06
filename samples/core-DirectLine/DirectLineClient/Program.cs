@@ -2,21 +2,27 @@
 {
     using System;
     using System.Configuration;
-    using System.Diagnostics;
     using System.Linq;
     using System.Threading.Tasks;
     using Microsoft.Bot.Connector.DirectLine;
     using Models;
     using Newtonsoft.Json;
+    using Microsoft.Extensions.Configuration;
 
     public class Program
     {
-        private static string directLineSecret = ConfigurationManager.AppSettings["DirectLineSecret"];
-        private static string botId = ConfigurationManager.AppSettings["BotId"];
+        private static string directLineSecret;
+        private static string botId;
         private static string fromUser = "DirectLineSampleClientUser";
 
         public static void Main(string[] args)
         {
+            IConfiguration configuration = new ConfigurationBuilder()
+                .AddJsonFile("appsettings.json", true, true)
+                .Build();
+
+            directLineSecret = configuration.GetValue<string>("DirectLineSecret");
+            botId= configuration.GetValue<string>("BotId");
             StartBotConversation().Wait();
         }
 
@@ -89,7 +95,7 @@
                                 case "image/png":
                                     Console.WriteLine($"Opening the requested image '{attachment.ContentUrl}'");
 
-                                    Process.Start(attachment.ContentUrl);
+                                    System.Diagnostics.Process.Start(attachment.ContentUrl);
                                     break;
                             }
                         }
